@@ -1,0 +1,21 @@
+version: "3"
+
+volumes:
+  config: {}
+
+services:
+  calibre:
+    build: .
+    container_name: calibre
+    restart: unless-stopped
+    ports:
+      - "8080:8080" # Admin port
+      - "8081:8081"
+    environment:
+      - TZ=America/Toronto
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - config:/config
+    env_file:
+      - .env
